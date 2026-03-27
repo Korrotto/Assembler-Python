@@ -22,7 +22,7 @@ Le reste (interface, architectures, programmes) sert surtout d’exemple et de t
 
 On donne :
 
-une architecture (JSON)
+une architecture (JSON)  
 un programme assembleur
 
 Le script :
