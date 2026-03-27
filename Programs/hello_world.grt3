@@ -1,0 +1,60 @@
+DEFINE BASE AS R0
+DEFINE TMP  AS R1
+
+START:
+    // port 0 -> H
+    LDI TMP 'H'
+    STR TMP 0 BASE
+    OUT 0 BASE
+
+    // port 1 -> E
+    LDI TMP 'E'
+    STR TMP 1 BASE
+    OUT 1 BASE
+
+    // port 2 -> L
+    LDI TMP 'L'
+    STR TMP 2 BASE
+    OUT 2 BASE
+
+    // port 3 -> L
+    LDI TMP 'L'
+    STR TMP 3 BASE
+    OUT 3 BASE
+
+    // port 4 -> O
+    LDI TMP 'O'
+    STR TMP 4 BASE
+    OUT 4 BASE
+
+    // port 5 -> espace
+    LDI TMP 0
+    STR TMP 5 BASE
+    OUT 5 BASE
+
+    // port 6 -> W
+    LDI TMP 'W'
+    STR TMP 6 BASE
+    OUT 6 BASE
+
+    // port 7 -> O
+    LDI TMP 'O'
+    STR TMP 7 BASE
+    OUT 7 BASE
+
+    // port 8 -> R
+    LDI TMP 'R'
+    STR TMP 8 BASE
+    OUT 8 BASE
+
+    // port 9 -> L
+    LDI TMP 'L'
+    STR TMP 9 BASE
+    OUT 9 BASE
+
+    // port 10 -> D
+    LDI TMP 'D'
+    STR TMP 10 BASE
+    OUT 10 BASE
+
+    HLT
