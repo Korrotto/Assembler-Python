@@ -145,11 +145,16 @@ Chaque instruction est une liste :
 strings → bits fixes  
 nombres → taille des opérandes (en bits)  
 Exemple  
+
+``` json
 "ADD": ["0001", 4, 4, 4]
+```
 
 → opcode + 3 opérandes
 
+``` json
 "LDI": ["0110", "00", 4, 8]
+```
 
 → opcode + bits fixes + registre + valeur
 
@@ -157,10 +162,13 @@ Exemple
 
 Permet de mettre des noms sur des valeurs.
 
-Exemple  
+Exemple
+
+``` json
 "R0": 0,  
 "R1": 1,  
 "ZERO": 0  
+```
 
 Donc :
 
