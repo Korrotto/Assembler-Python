@@ -144,6 +144,7 @@ Chaque instruction est une liste :
 
 strings → bits fixes  
 nombres → taille des opérandes (en bits)  
+
 Exemple  
 
 ``` json
