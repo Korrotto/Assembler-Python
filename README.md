@@ -2,84 +2,120 @@
 
 Un assembleur écrit en Python pour tester des architectures faites maison.
 
-Le fichier principal est assembler.py.
+Le fichier principal est assembler.py.  
 Le reste (interface, architectures, programmes) sert surtout d’exemple et de test.
 
-## Organisation  
-├── assembler.py  
-├── userInterface.py  
-├── Architecture/  
-│   ├── garnetCoreV2.json  
-│   └── garnetCoreV3.json  
-├── Programs/  
-│   ├── hello_world.grt3  
-│   └── division.grt3  
-├── Machine Code/  
-├── Errors/  
-├── Annoted List/  
+## Organisation
+
+```
+├── assembler.py
+├── userInterface.py
+├── Architecture/
+│ ├── garnetCoreV2.json
+│ └── garnetCoreV3.json
+├── Programs/
+│ ├── hello_world.grt3
+│ ├── error.grt3
+│ └── division.grt3
+├── Machine Code/
+├── Logs/
+│ └── error.log
+└── Annotated List/
+  └── division.lst
+```
 
 ## Fonctionnement
 
 On donne :
 
-une architecture (JSON)  
-un programme assembleur
+- une architecture (JSON)
+- un programme assembleur
 
 Le script :
 
-analyse le code  
-résout les alias et labels  
-vérifie les instructions  
-génère le code machine  
-## Utilisation  
-Avec l’interface (Pour l'architecture Garnet Core V3)
+- analyse le code
+- résout les alias et labels
+- vérifie les instructions
+- génère le code machine
+
+## Utilisation
+
+### Installation des dépendances
+
 ``` bash
-python userInterface.py  
+pip install -r requirements.txt
 ```
 
-Ou directement  
+### Avec l’interface
 
-``` python
-import assembler 
-
-machine_code, _ = assembler.assembleProgram("hello_world", "garnetCoreV3")
-assembler.writeMachineCode("hello_world", machine_code)
+``` bash
+python userInterface.py
 ```
-
-Changez hello_world par le nom du programme et garnetCoreV3 par le nom de l'architecture
 
 ## Langage assembleur
 
+### Instructions
+
+``` asm
+ADD R1 R5 R4
+ADD R1, R5, R4
+```
+
 ### Commentaires
 
-```
+``` asm
 // commentaire
+ADD 1 5 2 // commentaire en fin de ligne
 ```
 
 ### Alias
 
-```
+``` asm
 DEFINE TMP AS R1  
 DEFINE BASE AS R0
 ```
 
+Un alias est simplement un nom qui référence une valeur ou un autre alias.
+
 ### Labels
 
-```
+``` asm
 START:
     JMP START
+
+.main
+    JMP .main
 ```
 
+Un label est un alias particulier qui correspond à une adresse dans le programme.
 
-### Programmes fournis
+### Directive USED
 
-hello_world.grt3
+``` asm
+USED START
+USED .main
+```
+
+Permet d’indiquer explicitement qu’un label est utilisé, même s’il n’apparaît pas dans les instructions.
+
+Utile pour :
+
+les points d’entrée  
+éviter les warnings "alias non utilisé"  
+
+## Programmes fournis
+
+***hello_world.grt3***
 
 Affiche "HELLO WORLD" en écrivant caractère par caractère.
 
-```
+Extrait :
+
+``` asm
 DEFINE BASE AS R0
 DEFINE TMP  AS R1
+
+USED START
 
 START:
     LDI TMP 'H'
@@ -89,22 +125,26 @@ START:
     HLT
 ```
 
-division.grt3
+
+***division.grt3***
 
 Division entière simple par soustraction répétée.
 
-```
-DEFINE OUTRESTE    AS R0
+Extrait :
+
+``` asm
+DEFINE OUTRESTE AS R0
 DEFINE OUTQUOTIENT AS R5
-DEFINE DIVIDENDE   AS R1
-DEFINE DIVISEUR    AS R2
-DEFINE QUOTIENT    AS R3
-DEFINE TMP         AS R4
+DEFINE DIVIDENDE AS R1
+DEFINE DIVISEUR AS R2
+DEFINE QUOTIENT AS R3
+
+USED START
 
 START:
     LDI DIVIDENDE 50
-    LDI DIVISEUR  7
-    LDI QUOTIENT  0
+    LDI DIVISEUR 7
+    LDI QUOTIENT 0
     LDI OUTQUOTIENT 1
 
 LOOP:
@@ -132,20 +172,20 @@ Les fichiers dans Architecture/ définissent comment les instructions sont trans
 ``` json
 {
   "architecture_name": "Nom",
-  "word_size": 16,
   "instructions": { ... },
   "default_alias": { ... },
   "file_extension": ".ext"
 }
 ```
+
 ### Instructions (instructions)
 
 Chaque instruction est une liste :
 
 strings → bits fixes  
-nombres → taille des opérandes (en bits)  
+nombres → taille des opérandes (en bits)
 
-Exemple  
+Exemple :
 
 ``` json
 "ADD": ["0001", 4, 4, 4]
@@ -161,23 +201,27 @@ Exemple
 
 ### Alias (default_alias)
 
-Permet de mettre des noms sur des valeurs.
+Permet de définir des alias par défaut (Aucune vérification de leur utilisation)
 
-Exemple
+Exemple :
 
 ``` json
-"R0": 0,  
-"R1": 1,  
-"ZERO": 0  
+"R0": 0,
+"R1": 1,
+"ZERO": 0
 ```
 
 Donc :
 
+```
 ADD R1 R2 R3
+```
 
 devient :
 
+```
 ADD 1 2 3
+```
 
 ### Extension (file_extension)
 
@@ -187,38 +231,60 @@ ADD 1 2 3
 
 Définit le type de fichier attendu.
 
-À retenir  
-l’ordre dans les instructions = ordre des bits  
-les nombres définissent la taille des champs  
-les strings sont ajoutées telles quelles  
-les alias simplifient l’écriture du code
+À retenir :
+- l’ordre dans les instructions = ordre des bits  
+- les nombres définissent la taille des champs  
+- les strings sont ajoutées telles quelles  
+- les alias simplifient l’écriture du code
 
-## Erreurs et warnings  
+
+### Erreurs et warnings
 
 Les logs sont générés ici :
 
-Errors/nom_du_programme.log  
+Logs/nom_du_programme.log
 
-Erreurs (bloquantes)  
-instruction inconnue  
-mauvais nombre d’arguments  
-alias invalide  
-alias inconnu  
-alias circulaire  
+#### Erreurs (bloquantes)
 
-Warnings (non bloquants)  
-valeur hors limite pour le nombre de bits  
-(la valeur est tronquée pour rentrer dans la taille)  
-alias défini mais jamais utilisé  
+- instruction inconnue
+- mauvais nombre d’arguments
+- alias invalide
+- alias inconnu
+- alias circulaire (normalement ne devrait jamais arrivé)
+- directive mal formée
 
-## Sorties
-code machine :  
-Machine Code/nom.mc  
-liste annotée :  
-Annoted List/nom.lst  
+#### Warnings (non bloquants)
+- valeur hors limite pour le nombre de bits (la valeur est tronquée)
+- alias défini mais jamais utilisé
+Exemple de log
 
+Avec le programme error.grt3 :
 
-## Notes
+``` log
+Error : Alias already exists : TMP (line 3 : DEFINE TMP  AS R2)
+Error : Unrecognised alias : ERROR (line 4 : DEFINE TEST AS ERROR)
+Error : Format error for define : (line 5 : DEFINE A TEST)
+Error : Invalid alias name '?' : (line 6 : DEFINE ? AS R0)
+Error : Value unknown for alias ''H' : (line 10 : LDI TMP 'H)
+Error : Value unknown for alias 'BAS' : (line 11 : STR TMP BAS)
+Error : Format error for instruction : 'LDI' (line 10 : LDI TMP 'H)
+Error : Format error for instruction : 'STR' (line 11 : STR TMP BAS)
+Error : Unsupported instruction 'OIT' : (line 12 : OIT 500000 BASE)
+Error : Format error for instruction : 'STR' (line 16 : STR TMP BASE)
+Warning : Alias defined but never used: START
+```
+
+### Sorties
+
+**Code machine :**
+
+Machine Code/nom.mc
+
+**Liste annotée :**
+
+Annotated List/nom.lst
+
+### Notes
 assembler.py contient toute la logique  
 le projet est fait pour expérimenter des architectures  
-tout est modifiable facilement si tu veux créer ta propre ISA
+tout est modifiable facilement pour créer sa propre ISA 

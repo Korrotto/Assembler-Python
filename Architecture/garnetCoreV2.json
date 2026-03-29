@@ -1,6 +1,5 @@
 {
     "architecture_name" : "Garnet Core V2",
-    "word_size": 16,
     "instructions": {
         "ADD" : ["0000", 4, 4, 4],
         "SUB" : ["0001", 4, 4, 4],

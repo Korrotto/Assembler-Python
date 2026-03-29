@@ -1,6 +1,5 @@
 {
     "architecture_name" : "Garnet Core V3",
-    "word_size": 18,
     "instructions": {
         "NOP" : ["0000", "00000000000000"],
         "ARI" : ["0001", 2, 4, 4, 4],

@@ -1,6 +1,8 @@
 DEFINE BASE AS R0
 DEFINE TMP  AS R1
 
+USED START
+
 START:
     // port 0 -> H
     LDI TMP 'H'
