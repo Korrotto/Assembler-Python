@@ -40,7 +40,12 @@ Le script :
 
 ## Utilisation
 
-### Installation des dépendances
+### Prérequis
+
+- Python 3.10 ou supérieur
+- jsonschema
+
+Installation Jsonschema:
 
 ``` bash
 pip install -r requirements.txt
@@ -229,14 +234,7 @@ ADD 1 2 3
 "file_extension": ".grt3"
 ```
 
-Définit le type de fichier attendu.
-
-À retenir :
-- l’ordre dans les instructions = ordre des bits  
-- les nombres définissent la taille des champs  
-- les strings sont ajoutées telles quelles  
-- les alias simplifient l’écriture du code
-
+L'extension des programmes liès à l'architecture
 
 ### Erreurs et warnings
 
@@ -250,13 +248,15 @@ Logs/nom_du_programme.log
 - mauvais nombre d’arguments
 - alias invalide
 - alias inconnu
-- alias circulaire (normalement ne devrait jamais arrivé)
 - directive mal formée
+- alias circulaire (normalement ne devrait jamais arrivé)
 
 #### Warnings (non bloquants)
+
 - valeur hors limite pour le nombre de bits (la valeur est tronquée)
 - alias défini mais jamais utilisé
-Exemple de log
+
+Exemple de log :
 
 Avec le programme error.grt3 :
 
@@ -276,12 +276,10 @@ Warning : Alias defined but never used: START
 
 ### Sorties
 
-**Code machine :**
-
+**Code machine :**  
 Machine Code/nom.mc
 
-**Liste annotée :**
-
+**Liste annotée :**  
 Annotated List/nom.lst
 
 ### Notes
