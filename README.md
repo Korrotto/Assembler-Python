@@ -2,7 +2,7 @@
 
 Un assembleur écrit en Python pour tester des architectures faites maison.
 
-Le fichier principal est assembler.py.  
+Le fichier principal est `assembler.py`.  
 Le reste (interface, architectures, programmes) sert surtout d’exemple et de test.
 
 ## Organisation
@@ -108,9 +108,13 @@ Utile pour :
 les points d’entrée  
 éviter les warnings "alias non utilisé"  
 
+### Note
+
+Malgré le faite que tout les exemple sont entièrement en majuscules, l'assembleur supporte les minuscules
+
 ## Programmes fournis
 
-***hello_world.grt3***
+`hello_world.grt3`
 
 Affiche "HELLO WORLD" en écrivant caractère par caractère.
 
@@ -131,7 +135,7 @@ START:
 ```
 
 
-***division.grt3***
+`division.grt3`
 
 Division entière simple par soustraction répétée.
 
@@ -258,7 +262,7 @@ Logs/nom_du_programme.log
 
 Exemple de log :
 
-Avec le programme error.grt3 :
+Avec le programme `error.grt3` :
 
 ``` log
 Error : Alias already exists : TMP (line 3 : DEFINE TMP  AS R2)
