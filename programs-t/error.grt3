@@ -1,0 +1,24 @@
+DEFINE BASE AS R0
+DEFINE TMP  AS R1
+DEFINE TMP  AS R2
+DEFINE TEST AS ERROR
+DEFINE A TEST
+DEFINE ? AS R0
+
+START:
+    // port 0 -> H
+    LDI TMP 'H
+    STR TMP BAS
+    OIT 500000 BASE
+
+    // port 1 -> E
+    LDI TMP 'E'
+    STR TMP BASE
+    OUT 1 BASE
+
+    // port 2 -> L
+    LDI TMP 'L'
+    STR TMP 2 BASE
+    OUT 2 BASE
+
+    HLT

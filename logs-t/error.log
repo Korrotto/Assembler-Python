@@ -1,0 +1,11 @@
+Error : Alias already exists : TMP (line 3 : DEFINE TMP  AS R2)
+Error : Unrecognised alias : ERROR (line 4 : DEFINE TEST AS ERROR)
+Error : Format error for define : (line 5 : DEFINE A TEST)
+Error : Invalid alias name '?' : (line 6 : DEFINE ? AS R0)
+Error : Value unknown for alias ''H' : (line 10 : LDI TMP 'H)
+Error : Value unknown for alias 'BAS' : (line 11 : STR TMP BAS)
+Error : Format error for instruction : 'LDI' (line 10 : LDI TMP 'H)
+Error : Format error for instruction : 'STR' (line 11 : STR TMP BAS)
+Error : Unsupported instruction 'OIT' : (line 12 : OIT 500000 BASE)
+Error : Format error for instruction : 'STR' (line 16 : STR TMP BASE)
+Warning : Alias defined but never used: START
