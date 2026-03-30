@@ -12,11 +12,11 @@ if getattr(sys, 'frozen', False):
 else:
     scriptDirectory: str = dirname(abspath(__file__))
 
-ARCHITECTURE_DIRECTORY: str = join(scriptDirectory, 'Architecture')
-PROGRAMS_DIRECTORY: str = join(scriptDirectory, 'Programs')
-MACHINE_CODE_OUTPUT_DIRECTORY: str = join(scriptDirectory, 'Machine Code')
-LOGS_DIRECTORY: str = join(scriptDirectory, 'Logs')
-ANNOTATED_LISTING_DIRECTORY: str = join(scriptDirectory, 'Annotated List')
+ARCHITECTURE_DIRECTORY: str = join(scriptDirectory, 'architecture')
+PROGRAMS_DIRECTORY: str = join(scriptDirectory, 'programs')
+MACHINE_CODE_OUTPUT_DIRECTORY: str = join(scriptDirectory, 'machine-code')
+LOGS_DIRECTORY: str = join(scriptDirectory, 'logs')
+ANNOTATED_LISTING_DIRECTORY: str = join(scriptDirectory, 'annotated-list')
 
 DIRECTIVE = 'directive'
 USED_DIRECTIVE = 'used_directive'
